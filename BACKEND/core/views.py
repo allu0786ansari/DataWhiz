@@ -1,19 +1,22 @@
-from rest_framework.response import Response, render
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
-import sqlite3
+import pymysql
 from .query_processor import convert_nl_to_sql
 
 @api_view(['POST'])
 def process_query(request):
-    """
-    API to process natural language queries and return SQL results.
-    """
+    """API to convert NL → SQL and return results"""
     try:
         user_query = request.data.get("query", "")
         sql_query = convert_nl_to_sql(user_query)
 
-        # Connect to the database
-        conn = sqlite3.connect("db.sqlite3")
+        # Connect to MySQL
+        conn = pymysql.connect(
+            host="localhost",
+            user="your_username",
+            password="your_password",
+            database="your_database"
+        )
         cursor = conn.cursor()
         cursor.execute(sql_query)
         result = cursor.fetchall()
