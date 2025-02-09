@@ -6,4 +6,5 @@ spacy
 nltk
 pandas
 django-cors-headers
-
+mysqlclient
+python-decouple
