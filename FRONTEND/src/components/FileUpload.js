@@ -27,7 +27,7 @@ const FileUpload = () => {
 
     return (
         <div className="upload-container">
-            <h3>Upload a File to datawhiz</h3>
+            <h3>Upload a File to NLQ AI</h3>
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
             <button onClick={handleFileUpload} disabled={loading}>Upload</button>
             {loading && <LoadingSpinner />}

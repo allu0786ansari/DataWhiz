@@ -10,11 +10,12 @@ function App() {
     <div>
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="app-name">DataWhiz</div> {/* App Name on the Left */}
+        <div className="app-name">NLQ AI</div> {/* App Name on the Left */}
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/upload">File Upload</Link></li>
           <li><Link to="/about">About Us</Link></li>
+          <li> <Link to ="#"> Login </Link></li>
         </ul>
       </nav>
 

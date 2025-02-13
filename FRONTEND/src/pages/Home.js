@@ -5,7 +5,7 @@ import FileUpload from "../components/FileUpload";
 const Home = () => {
     return (
         <div className="home-container">
-            <h1>DataWhiz - AI Powered Query Answering System</h1>
+            <h1>NLQ AI - AI Powered Query Answering System</h1>
             <QueryInput />
             <FileUpload />
         </div>

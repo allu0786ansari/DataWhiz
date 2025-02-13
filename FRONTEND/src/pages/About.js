@@ -3,7 +3,7 @@ import "../App.css";
 const AboutUs = () => {
     return (
         <div className="about-container">
-            <h1>DataWhiz - AI-powered Query Answering System </h1>
+            <h1>NLQ AI - AI powered Query Answering System </h1>
             <p>
                 Our AI-powered Query Answering System allows users to interact with databases using natural language. 
                 It eliminates the need for complex SQL queries, making data retrieval easy for non-technical users.
