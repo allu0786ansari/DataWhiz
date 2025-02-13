@@ -28,7 +28,7 @@ const QueryInput = () => {
 
     return (
         <div className="query-container">
-            <h2>Interact with your database</h2>
+            <h2>NLQ AI - Interact with your database</h2>
             <form onSubmit={handleQuerySubmit}>
                 <input
                     type="text"
