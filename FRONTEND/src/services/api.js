@@ -1,26 +1,17 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8000/api"; // Django backend URL
+const API_BASE_URL = "http://127.0.0.1:8000/core";
 
-export const processQuery = async (query) => {
+export const generateSQL = async (naturalQuery) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/query/`, { query });
-        return response.data;
-    } catch (error) {
-        throw error.response ? error.response.data : { error: "Server Error" };
-    }
-};
-
-export const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-        const response = await axios.post(`${API_BASE_URL}/upload/`, formData, {
-            headers: { "Content-Type": "multipart/form-data" },
+        const cleanQuery = naturalQuery.trim();  // ✅ Remove extra spaces/newlines
+        const response = await axios.post(`${API_BASE_URL}/generate_sql/`, { 
+            query: cleanQuery,
         });
-        return response.data;
+        return response.data.sql_query;
     } catch (error) {
-        throw error.response ? error.response.data : { error: "File Upload Failed" };
+        console.error("Error generating SQL:", error);
+        return "Error generating SQL query.";
     }
 };
+

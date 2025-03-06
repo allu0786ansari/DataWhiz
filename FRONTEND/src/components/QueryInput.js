@@ -1,46 +1,23 @@
-import React, { useState } from "react";
-import { processQuery } from "../services/api";
-import ResultsDisplay from "./ResultsDisplay";
-import LoadingSpinner from "./LoadingSpinner";
-import ErrorMessage from "./ErrorMessage";
+import { useState } from "react";
+import { generateSQL } from "../services/api";
 
-const QueryInput = () => {
-    const [query, setQuery] = useState("");
-    const [result, setResult] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+const QueryInput = ({ setSqlQuery }) => {
+    const [naturalQuery, setNaturalQuery] = useState("");
 
-    const handleQuerySubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError("");
-        setResult(null);
-
-        try {
-            const data = await processQuery(query);
-            setResult(data);
-        } catch (err) {
-            setError(err.error || "An error occurred");
-        }
-
-        setLoading(false);
+    const handleGenerateSQL = async () => {
+        const sql = await generateSQL(naturalQuery);
+        setSqlQuery(sql);
     };
 
     return (
-        <div className="query-container">
-            <h2>NLQ AI - Interact with your database</h2>
-            <form onSubmit={handleQuerySubmit}>
-                <input
-                    type="text"
-                    placeholder="Enter a question in natural language..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-                <button type="submit" disabled={loading}>Submit</button>
-            </form>
-            {loading && <LoadingSpinner />}
-            {error && <ErrorMessage message={error} />}
-            {result && <ResultsDisplay result={result} />}
+        <div className="query-input">
+            <input
+                type="text"
+                value={naturalQuery}
+                onChange={(e) => setNaturalQuery(e.target.value)}
+                placeholder="Enter your question (e.g., Show all employees earning more than $50,000)"
+            />
+            <button onClick={handleGenerateSQL}>Generate SQL</button>
         </div>
     );
 };
