@@ -14,6 +14,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "core",
+    "db",
     "django_extensions",
     
 ]
@@ -92,7 +96,7 @@ DATABASES = {
 }
 print(config('DB_NAME'))  # This should print "personalized_financial_assistant"
 
-
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 # Password validation

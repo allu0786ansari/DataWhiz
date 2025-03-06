@@ -8,3 +8,4 @@ pandas
 django-cors-headers
 mysqlclient
 python-decouple
+cryptography

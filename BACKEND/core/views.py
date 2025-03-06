@@ -1,28 +1,22 @@
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-import pymysql
-from .query_processor import convert_nl_to_sql
+from rest_framework import status
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from .query_processor import generate_sql_query
 
-@api_view(['POST'])
-def process_query(request):
-    """API to convert NL → SQL and return results"""
-    try:
-        user_query = request.data.get("query", "")
-        sql_query = convert_nl_to_sql(user_query)
+class GenerateSQLQueryView(APIView):
+    def post(self, request):
+        natural_query = request.data.get("query", "")
+        if not natural_query:
+            return Response({"error": "No query provided"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Connect to MySQL
-        conn = pymysql.connect(
-            host="localhost",
-            user="your_username",
-            password="your_password",
-            database="your_database"
-        )
-        cursor = conn.cursor()
-        cursor.execute(sql_query)
-        result = cursor.fetchall()
-        conn.close()
+        sql_query = generate_sql_query(natural_query)
+        return Response({"sql_query": sql_query}, status=status.HTTP_200_OK)
 
-        return Response({"query": sql_query, "result": result})
+def home(request):
+    return redirect("http://localhost:3000/")
 
-    except Exception as e:
-        return Response({"error": str(e)}, status=400)
+"""def home(request):
+    return redirect("http://localhost:3000/")
+    """

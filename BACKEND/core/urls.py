@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import process_query
+from .views import GenerateSQLQueryView, home
 
 urlpatterns = [
-    path('query/', process_query, name='process_query'),
+    path("", home, name="home"), 
+    path("generate_sql/", GenerateSQLQueryView.as_view(), name="generate_sql"),
 ]
