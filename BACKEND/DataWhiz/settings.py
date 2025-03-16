@@ -96,7 +96,7 @@ DATABASES = {
 }
 print(config('DB_NAME'))  # This should print "personalized_financial_assistant"
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 
 # Password validation

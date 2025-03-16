@@ -1,26 +1,26 @@
-import openai
+import google.generativeai as genai
+import os
 import time
 from django.conf import settings
 
+# Ensure API key exists before using it
+if settings.GOOGLE_API_KEY:
+    genai.configure(api_key=settings.GOOGLE_API_KEY)
+else:
+    raise ValueError("GOOGLE_API_KEY is not set in settings.py or environment variables.")
+
 def generate_sql_query(natural_text, retries=3, delay=2):
-    prompt = f"Convert the following English statement into an SQL query:\n\n'{natural_text}'"
+    prompt = f"Convert the following English statement into an SQL query:'{natural_text}'"
     
     for attempt in range(retries):
         try:
-            client = openai.Client(api_key=settings.OPENAI_API_KEY)
+            model = genai.GenerativeModel('gemini-1.5-pro')
+            response = model.generate_content(prompt)
 
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",  # Use a model you have access to
-                messages=[{"role": "user", "content": prompt}]
-            )
+            return response.text.strip()
 
-            return response.choices[0].message.content  
-
-        except openai.APIConnectionError:
+        except Exception as e:
             if attempt < retries - 1:
                 time.sleep(delay)  # Wait before retrying
                 continue
-            return "Error generating SQL: Connection error. Please check your network."
-
-        except Exception as e:
             return f"Error generating SQL: {str(e)}"
