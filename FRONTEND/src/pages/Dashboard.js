@@ -3,13 +3,13 @@ import QueryInput from "../components/QueryInput";
 import ResultsTable from "../components/ResultsTable";
 
 const Dashboard = () => {
-    const [sqlQuery, setSqlQuery] = useState("");
+    const [queryResults, setQueryResults] = useState([]); // Store executed query results
 
     return (
         <div>
             <h1>Natural Language to SQL Converter</h1>
-            <QueryInput setSqlQuery={setSqlQuery} />
-            {sqlQuery && <ResultsTable sqlQuery={sqlQuery} />}
+            <QueryInput setQueryResults={setQueryResults} />
+            {queryResults.length > 0 && <ResultsTable queryResults={queryResults} />}
         </div>
     );
 };

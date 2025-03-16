@@ -15,3 +15,15 @@ export const generateSQL = async (naturalQuery) => {
     }
 };
 
+export const executeSQL = async (sqlQuery) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/execute_sql/`, { 
+            sql_query: sqlQuery,
+        });
+        return response.data.results; // Assuming backend returns results
+    } catch (error) {
+        console.error("Error executing SQL:", error);
+        return null; // Return null to indicate failure
+    }
+};
+
