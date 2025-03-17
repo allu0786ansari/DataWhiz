@@ -1,7 +1,6 @@
 import { useState } from "react";
 import QueryInput from "../components/QueryInput";
 import ResultsTable from "../components/ResultsTable";
-
 const Dashboard = () => {
     const [queryResults, setQueryResults] = useState([]); // Store executed query results
 
