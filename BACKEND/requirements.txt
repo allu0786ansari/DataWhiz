@@ -1,9 +1,7 @@
 django
 djangorestframework
-openai
 transformers
-spacy
-nltk
+
 pandas
 django-cors-headers
 mysqlclient
