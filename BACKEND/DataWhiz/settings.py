@@ -94,7 +94,7 @@ DATABASES = {
         'PORT': config('DB_PORT', default='3306'),
     }
 }
-print(config('DB_NAME'))  # This should print "personalized_financial_assistant"
+print(config('DB_NAME'))
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
