@@ -130,6 +130,8 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.fastvenv
+fastvenv/
 .askdbvenv
 askdbvenv/
 env/

@@ -1,7 +1,6 @@
 django
 djangorestframework
 transformers
-
 pandas
 django-cors-headers
 mysqlclient
