@@ -5,3 +5,8 @@ psycopg2
 pandas
 matplotlib
 pymysql
+pydantic
+plotly
+google-generativeai
+python-dotenv
+python-multipart
